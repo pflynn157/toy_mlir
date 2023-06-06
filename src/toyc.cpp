@@ -11,6 +11,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "toy/Dialect.h"
+#include "toy/Dialect2.h"
 #include "toy/MLIRGen.h"
 #include "toy/Parser.h"
 #include "toy/Passes.h"
@@ -293,6 +294,7 @@ int main(int argc, char **argv) {
   mlir::MLIRContext context;
   // Load our Dialect in this MLIR Context.
   context.getOrLoadDialect<mlir::toy::ToyDialect>();
+  context.getOrLoadDialect<mlir::toy2::ToyDialect2>();
 
   mlir::OwningOpRef<mlir::ModuleOp> module;
   if (int error = loadAndProcessMLIR(context, module))

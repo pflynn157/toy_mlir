@@ -17,6 +17,7 @@ set(SRC
   parser/AST.cpp
 
   mlir/Dialect.cpp
+  mlir/Dialect2.cpp
   mlir/LowerToAffineLoops.cpp
   mlir/LowerToLLVM.cpp
   mlir/MLIRGen.cpp
@@ -25,7 +26,7 @@ set(SRC
   )
 
 add_llvm_executable(toyc ${SRC})
-add_dependencies(toyc ToyDialect1 ToyDialect2 ToyDialect3)
+add_dependencies(toyc ToyDialect1 ToyDialect2 ToyDialect3 ToySubDialect1)
 llvm_update_compile_flags(toyc)
 
 include_directories(${CMAKE_SOURCE_DIR}/include/)
