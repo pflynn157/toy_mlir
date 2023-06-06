@@ -43,7 +43,6 @@ public:
     Expr_BinOp,
     Expr_Call,
     Expr_Print,
-    Expr_Println,
   };
 
   ExprAST(ExprASTKind kind, Location location)
@@ -195,20 +194,6 @@ public:
 
   /// LLVM style RTTI
   static bool classof(const ExprAST *c) { return c->getKind() == Expr_Print; }
-};
-
-/// Expression class for builtin println calls
-class PrintlnExprAST : public ExprAST {
-  std::unique_ptr<ExprAST> arg;
-
-public:
-  PrintlnExprAST(Location loc, std::unique_ptr<ExprAST> arg)
-      : ExprAST(Expr_Println, std::move(loc)), arg(std::move(arg)) {}
-
-  ExprAST *getArg() { return arg.get(); }
-
-  /// LLVM style RTTI
-  static bool classof(const ExprAST *c) { return c->getKind() == Expr_Println; }
 };
 
 /// This class represents the "prototype" for a function, which captures its

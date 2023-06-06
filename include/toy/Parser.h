@@ -205,13 +205,6 @@ private:
         return parseError<ExprAST>("<single arg>", "as argument to print()");
 
       return std::make_unique<PrintExprAST>(std::move(loc), std::move(args[0]));
-
-    // Or it could be a builtin call to println
-    } else if (name == "println") {
-      if (args.size() != 1)
-        return parseError<ExprAST>("<single arg>", "as an argument to println()");
-
-      return std::make_unique<PrintlnExprAST>(std::move(loc), std::move(args[0]));
     }
 
     // Call to a user-defined function

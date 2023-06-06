@@ -164,6 +164,10 @@ private:
           function.getFunctionType().getInputs(), getType(VarType{})));
     }
 
+    // If this function isn't main, then set the visibility to private.
+    if (funcAST.getProto()->getName() != "main")
+      function.setPrivate();
+
     return function;
   }
 
@@ -335,16 +339,6 @@ private:
     return mlir::success();
   }
 
-  // Println
-  mlir::LogicalResult mlirGen(PrintlnExprAST &call) {
-    auto arg = mlirGen(*call.getArg());
-    if (!arg)
-      return mlir::failure();
-
-    builder.create<PrintlnOp>(loc(call.loc()), arg);
-    return mlir::success();
-  }
-
   /// Emit a constant for a single number (FIXME: semantic? broadcast?)
   mlir::Value mlirGen(NumberExprAST &num) {
     return builder.create<ConstantOp>(loc(num.loc()), num.getValue());
@@ -418,13 +412,6 @@ private:
       if (auto *print = dyn_cast<PrintExprAST>(expr.get())) {
         if (mlir::failed(mlirGen(*print)))
           return mlir::success();
-        continue;
-      }
-
-      if (auto *println = dyn_cast<PrintlnExprAST>(expr.get())) {
-        if (mlir::failed(mlirGen(*println))) {
-          return mlir::success();
-        }
         continue;
       }
 

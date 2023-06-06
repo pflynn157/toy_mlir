@@ -1,7 +1,6 @@
 def main() {
-	var a = 10;
+	var a = [1, 2, 3, 4, 5];
+	var b = a * [2, 2, 2, 2, 2];
 	print(a);
-
-	println(a);
-	printlnn(a);
+	print(b);
 }
