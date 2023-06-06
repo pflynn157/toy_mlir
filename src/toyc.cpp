@@ -13,6 +13,7 @@
 #include "toy/Dialect.h"
 #include "toy/Dialect2.h"
 #include "toy/MLIRGen.h"
+#include "toy/MLIRGen2.h"
 #include "toy/Parser.h"
 #include "toy/Passes.h"
 
@@ -107,7 +108,8 @@ int loadMLIR(mlir::MLIRContext &context,
     auto moduleAST = parseInputFile(inputFilename);
     if (!moduleAST)
       return 6;
-    module = mlirGen(context, *moduleAST);
+    //module = mlirGen(context, *moduleAST);
+    module = mlirGen2(context, *moduleAST);
     return !module ? 1 : 0;
   }
 

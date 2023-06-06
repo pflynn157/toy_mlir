@@ -21,6 +21,7 @@ set(SRC
   mlir/LowerToAffineLoops.cpp
   mlir/LowerToLLVM.cpp
   mlir/MLIRGen.cpp
+  mlir/MLIRGen2.cpp
   mlir/ShapeInferencePass.cpp
   mlir/ToyCombine.cpp
   )
