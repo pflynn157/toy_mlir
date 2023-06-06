@@ -1,0 +1,7 @@
+def main() {
+	var a = 10;
+	print(a);
+
+	println(a);
+	printlnn(a);
+}
