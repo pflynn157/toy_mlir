@@ -131,6 +131,12 @@ private:
     //  return nullptr;
     //}
 
+    
+
+    auto const_op = builder.create<ConstOp>(loc(funcAST.getProto()->loc()), 20);
+    //SmallVector<mlir::Value, 4> operands;
+    //operands.push_back(const_op);
+
     builder.create<OutOp>(loc(funcAST.getProto()->loc()));
     builder.create<RetOp>(loc(funcAST.getProto()->loc()));
 

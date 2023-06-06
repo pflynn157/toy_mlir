@@ -19,6 +19,36 @@ class Toy_Op2<string mnemonic, list<Trait> traits = []> :
     Op<Toy_Dialect2, mnemonic, traits>;
 
 //===----------------------------------------------------------------------===//
+// ConstOp
+//===----------------------------------------------------------------------===//
+def ConstOp : Toy_Op2<"constant", [Pure]> {
+  // Provide a summary and description for this operation. This can be used to
+  // auto-generate documentation of the operations within our dialect.
+  let summary = "constant";
+  let description = [{
+    Constant operation turns a literal into an SSA value. The data is attached
+    to the operation as an attribute. For example:
+  }];
+
+  // The constant operation takes an attribute as the only input.
+  let arguments = (ins F64ElementsAttr:$value);
+
+  // The constant operation returns a single value of TensorType.
+  let results = (outs F64Tensor);
+
+  // Indicate that the operation has a custom parser and printer method.
+  //let hasCustomAssemblyFormat = 1;
+
+  let builders = [
+    // Build a constant with a given constant floating-point value.
+    OpBuilder<(ins "double":$value)>
+  ];
+
+  // Indicate that additional verification for this operation is necessary.
+  //let hasVerifier = 1;
+}
+
+//===----------------------------------------------------------------------===//
 // FunctOp
 //===----------------------------------------------------------------------===//
 
@@ -68,11 +98,6 @@ def OutOp : Toy_Op2<"out", [HasParent<"FunctOp">]> {
 	let description = [{
 		blah blah blah
 	}];
-
-	// Allow building a ReturnOp with no return operand.
-  let builders = [
-    OpBuilder<(ins), [{ build($_builder, $_state, std::nullopt); }]>
-  ];
 }
 
 //===----------------------------------------------------------------------===//

@@ -83,6 +83,20 @@ ArrayAttr FunctOp::getCallableResAttrs() {
 }
 
 //===----------------------------------------------------------------------===//
+// ConstOp
+//===----------------------------------------------------------------------===//
+
+/// Build a constant operation.
+/// The builder is passed as an argument, so is the state that this method is
+/// expected to fill in order to build the operation.
+void ConstOp::build(mlir::OpBuilder &builder, mlir::OperationState &state,
+                       double value) {
+  auto dataType = RankedTensorType::get({}, builder.getF64Type());
+  auto dataAttribute = DenseElementsAttr::get(dataType, value);
+  ConstOp::build(builder, state, dataType, dataAttribute);
+}
+
+//===----------------------------------------------------------------------===//
 // RetOp
 //===----------------------------------------------------------------------===//
 
