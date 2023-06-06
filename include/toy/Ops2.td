@@ -60,6 +60,22 @@ def FunctOp : Toy_Op2<"func", [
 }
 
 //===----------------------------------------------------------------------===//
+// OutOp
+//===----------------------------------------------------------------------===//
+
+def OutOp : Toy_Op2<"out", [HasParent<"FunctOp">]> {
+	let summary = "output operation";
+	let description = [{
+		blah blah blah
+	}];
+
+	// Allow building a ReturnOp with no return operand.
+  let builders = [
+    OpBuilder<(ins), [{ build($_builder, $_state, std::nullopt); }]>
+  ];
+}
+
+//===----------------------------------------------------------------------===//
 // RetOp
 //===----------------------------------------------------------------------===//
 

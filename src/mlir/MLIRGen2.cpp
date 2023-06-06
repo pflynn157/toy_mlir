@@ -131,7 +131,7 @@ private:
     //  return nullptr;
     //}
 
-
+    builder.create<OutOp>(loc(funcAST.getProto()->loc()));
     builder.create<RetOp>(loc(funcAST.getProto()->loc()));
 
     // Implicitly return void if no return statement was emitted.
